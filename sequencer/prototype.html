@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>prototype</title>
+</head>
+<body>
+  <script src="js/p5.min.js"></script>
+  <script src="js/p5.dom.js"></script>
+  <script src="js/p5.sound.js"></script>
+  <script>
+
+  var obj;
+
+  var arrCount = 16;
+
+  function setup(){
+    createCanvas(800,600);
+
+    obj = new Obj(100,100,50,'#FC0');
+
+  }
+
+
+  function draw(){
+    obj.set();
+  }
+
+  function Obj(aX,aY,aRad,aColor){
+    this.x = aX;
+    this.y = aY;
+    this.radius = aRad;
+    this.color = aColor;
+    noStroke();
+    fill(this.color);
+    ellipse(this.x,this.y,this.radius,this.radius);
+
+    this.arr = [];
+
+    for (var i = 0; i < arrCount; i++) {
+      this.arr[i] = 0;
+    }
+
+  }
+
+  Obj.prototype.set = function(){
+    console.log(this.arr);
+  }
+
+
+
+
+
+
+
+
+  </script>
+</body>
+</html>

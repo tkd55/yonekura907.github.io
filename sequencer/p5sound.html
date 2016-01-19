@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Sound</title>
+  <script src="js/p5.min.js"></script>
+  <script src="js/p5.sound.js"></script>
+</head>
+<body>
+
+  <script>
+  var A1;
+
+  // プリロード
+  function preload() {
+    A1 = loadSound('audio/casio/A1.mp3');
+  }
+
+
+  function setup() {
+    createCanvas(100, 100);
+    background(0, 255, 0);
+
+    textAlign(CENTER);
+    text('click here to play', width/2, height/2);
+
+    // ボリューム
+    A1.setVolume(0.5);
+  }
+
+  // play sound on mouse press over canvas
+  function mousePressed() {
+    if (mouseX < width && mouseY < height && mouseX > 0 && mouseY > 0) {
+      // プレイ
+      A1.play();
+    }
+  }
+
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Sequencer</title>
+</head>
+<body>
+  <script src="js/p5.min.js"></script>
+  <script src="js/p5.dom.js"></script>
+  <script src="js/p5.sound.js"></script>
+  <script>
+
+  // シーケンス用配列
+  var sqArr = [0,0,0,0,1,0,0,0];
+
+  // シーケンサー配列の数
+  var sqCount = sqArr.length;
+
+  // ループカウント
+  var loopCount = 0;
+
+
+  // 初期設定
+  function setup() {
+    createCanvas(900, 600); //Canvasの生成
+    background(255); //初期の背景色
+  }
+
+
+  // ループ関数
+  function draw(){
+    frameRate(60*4/60);
+    // console.log(sqArr);
+    background(255);
+
+
+    // シーケンサー用の円の配置
+    for (var i = 0; i < sqArr.length; i++) {
+      noStroke(); //線なし
+
+      // シーケンス用配列の値が0なら
+      if(sqArr[i] == 0){
+        fill(200); // 塗りはグレー
+      } else {
+        // シーケンス用配列の値が1なら
+        fill(255, 150, 0); // 塗りはオレンジ
+      }
+      // 円の配置
+      ellipse(50*i + 50, 150, 40, 40);
+    }
+
+    console.log(loopCount);
+
+    // ループ用の円の色
+    fill(255, 0, 0);
+    // ループ用の円の配置
+    ellipse(50 * loopCount + 50, 150, 40, 40);
+
+    // console.log(sqArr[loopCount]);
+
+    // シーケンス用配列のループカンター番目の値が1なら
+    if(sqArr[loopCount] !== 0){
+      console.log('play');
+    }
+
+    // ループカンターをインクリメント
+    loopCount++;
+
+    // ループカウンターの数がシーケンス用配列の最大になったら
+    if(loopCount >= sqCount){
+      loopCount = 0; //ループカンターを0に戻す
+    }
+
+  }
+
+  </script>
+</body>
+</html>

@@ -1,5 +1,6 @@
 // 読み込むサウンド用配列
-var sounds = ['A','Csharp','E','Fsharp'];
+var sounds = [];
+
 // 読み込むサウンド用データ
 var soundData = [
   'audio/casio/sample.mp3',
@@ -7,7 +8,6 @@ var soundData = [
 	'audio/casio/E2.mp3',
 	'audio/casio/Fs2.mp3'
 ]
-
 
 // ループカウント
 var loopCount = 0;
@@ -23,12 +23,13 @@ var startBtn; // スタートボタン
 var stopBtn; // ストップ
 
 
+// シーケンサーインスタンス用の変数
 var a, csharp, e, fsharp;
 
 
 // 音データのプリロード
 function preload() {
-  for (var i = 0; i < sounds.length; i++) {
+  for (var i = 0; i < soundData.length; i++) {
     sounds[i] = loadSound(soundData[i]);
   }
 }
@@ -78,34 +79,25 @@ function draw(){
   // console.log(bpmValue);
   frameRate( (bpmValue * 4) / 60);　// BMPをフレームレートに変換
 
-
   a.set();
   csharp.set();
   e.set();
   fsharp.set();
 
 
+  // ループカンターをインクリメント
+  loopCount++;
+
   // ループカウンターの数がシーケンス用配列の最大になったら
   if(loopCount >= sqCount){
     loopCount = 0; //ループカンターを0に戻す
   }
 
-
-  a.play();
-  csharp.play();
-  e.play();
-  fsharp.play();
-
-
-
-  // ループカンターをインクリメント
-  loopCount++;
-
 }
 
 
 
-// シーケンサークラス
+// シーケンサー・クラス
 function Sequencer(aX,aY,aSound){
 
   this.x = aX;
@@ -155,6 +147,7 @@ function Sequencer(aX,aY,aSound){
 
 
 
+
 Sequencer.prototype.set = function(){
 
   // A1サウンドのボリューム
@@ -174,11 +167,6 @@ Sequencer.prototype.set = function(){
     // 円の配置
     ellipse(50*i + this.x, this.y+70, 40, 40);
   }
-
-}
-
-
-Sequencer.prototype.play = function(){
 
   // ループ用の円の色
   fill(255, 0, 0);

@@ -90,10 +90,6 @@ function draw(){
     ellipse(50*i + 50, 150, 40, 40);
   }
 
-  // ループカウンターの数がシーケンス用配列の最大になったら
-  if(loopCount >= sqArr.length){
-    loopCount = 0; //ループカンターを0に戻す
-  }
 
   // ループ用の円の色
   fill(255, 0, 0);
@@ -112,6 +108,10 @@ function draw(){
   // ループカンターをインクリメント
   loopCount++;
 
+  // ループカウンターの数がシーケンス用配列の最大になったら
+  if(loopCount >= sqArr.length){
+    loopCount = 0; //ループカンターを0に戻す
+  }
 }
 
 
