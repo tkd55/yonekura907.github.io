@@ -95,57 +95,57 @@ function draw(){
 
 }
 
-
-
 // シーケンサー・クラス
 function Sequencer(aX,aY,aSound){
-
-  this.x = aX;
-  this.y = aY;
-  this.sound = aSound;
-
-  // シーケンス用配列
-  this.sqArr = [];
-  // 16個分、配列に0を並べる
-  for (var i = 0; i < sqCount; i++) {
-    this.sqArr[i] = 0;
-  }
-
-  // イベントの
-  var thatSqArr = this.sqArr;
-
-  this.btnArr = []; // 入力ボタン用配列
-
-  // 入力ボタンの生成
-  for (var i = 0; i < this.sqArr.length; i++) {
-    this.btnArr[i] = createButton(i); //<button>の生成
-    this.btnArr[i].value(i); //<button>のvalueにi番を設定
-    this.btnArr[i].position(49 * i + this.x, this.y); //<button>の位置
-    this.btnArr[i].mousePressed(function(e){
-       //<button>を押した時のイベント
-      console.log(this.elt.value);
-      changeInput(this.elt.value);
-    });
-  }
-
-
-  // インプット入力の値をシーケンス用配列に設定する
-  function changeInput(value) {
-    console.log(value+'click');
-
-    if( thatSqArr[value] == 0 ){
-      // トグル　現状の値が0なら1を設定
-      thatSqArr[value] = 1;
-      console.log('111');
-    } else {
-      thatSqArr[value] = 0;
-      // トグル　現状の値が1なら0を設定
-      console.log('000');
-    }
-  }
+  // 初期設定
+  this.init(aX,aY,aSound);
 }
 
+// 初期設定をするメソッド
+Sequencer.prototype.init = function(aX,aY,aSound){
+    this.x = aX;
+    this.y = aY;
+    this.sound = aSound;
+  
+    // シーケンス用配列
+    this.sqArr = [];
+    // 16個分、配列に0を並べる
+    for (var i = 0; i < sqCount; i++) {
+      this.sqArr[i] = 0;
+    }
+  
+    // イベントの
+    var thatSqArr = this.sqArr;
+  
+    this.btnArr = []; // 入力ボタン用配列
+  
+    // 入力ボタンの生成
+    for (var i = 0; i < this.sqArr.length; i++) {
+      this.btnArr[i] = createButton(i); //<button>の生成
+      this.btnArr[i].value(i); //<button>のvalueにi番を設定
+      this.btnArr[i].position(49 * i + this.x, this.y); //<button>の位置
+      this.btnArr[i].mousePressed(function(e){
+         //<button>を押した時のイベント
+        console.log(this.elt.value);
+        this.changeInput(this.elt.value);
+      });
+    }
+}
 
+// インプット入力の値をシーケンス用配列に設定する
+Sequencer.prototype.changeInput = function(aValue) {
+    console.log(aValue+'click');
+
+    if( thatSqArr[aValue] == 0 ){
+        // トグル　現状の値が0なら1を設定
+        thatSqArr[aValue] = 1;
+        console.log('111');
+    } else {
+        thatSqArr[aValue] = 0;
+        // トグル　現状の値が1なら0を設定
+        console.log('000');
+    }
+}
 
 
 Sequencer.prototype.set = function(){
